@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class GuiPlayers extends JFrame implements ActionListener {
-    private JTable playerTable;
-    private DefaultTableModel tableModel;
+    private final JTable playerTable;
+    private final DefaultTableModel tableModel;
     private JButton editButton;
     private JButton saveButton;
     private JButton backButton;
@@ -42,9 +42,9 @@ public class GuiPlayers extends JFrame implements ActionListener {
         editButton = new JButton("Edit player");
         editButton.addActionListener(this);
         saveButton = new JButton("Save changes");
-        saveButton.addActionListener(e -> saveChanges());
+        saveButton.addActionListener(_ -> saveChanges());
         backButton = new JButton("Back");
-        backButton.addActionListener(e -> dispose());
+        backButton.addActionListener(_ -> dispose());
 
         buttonPanel.add(editButton);
         buttonPanel.add(saveButton);
@@ -89,6 +89,12 @@ public class GuiPlayers extends JFrame implements ActionListener {
             String newName = JOptionPane.showInputDialog("Enter new name:", player.getName());
             if (newName != null && !newName.trim().isEmpty()) {
                 tableModel.setValueAt(newName, selectedRow, 1);
+            }
+
+            String newNumber = JOptionPane.showInputDialog("Enter new number:", player.getNumber());
+            if (newNumber != null && !newNumber.trim().isEmpty()) {
+                tableModel.setValueAt(newNumber, selectedRow, 0);
+                player.setNumber(newNumber); // Actualizar el número en el objeto Player
             }
 
             String newPosition = JOptionPane.showInputDialog("Enter new position (GK, DF, MF, FW):", player.getPosition().name());
