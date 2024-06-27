@@ -70,6 +70,8 @@ public class GuiPlayers extends JFrame implements ActionListener {
             Object[] row = {player.getNumber(), player.getName(), player.getPosition().name()};
             tableModel.addRow(row);
         }
+
+        playerTable.setDefaultEditor(Object.class, null);
     }
 
     private void saveChanges() {
