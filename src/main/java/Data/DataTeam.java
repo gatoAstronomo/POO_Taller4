@@ -39,5 +39,9 @@ public class DataTeam {
 
         return new Team(name, ranking, imagePath, playersPath, DataPlayer.loadPlayers(playersPath));
     }
+    public static ArrayList<Team> getTeams(){
+        ArrayList<Team> teams = loadTeams("src/main/java/Data/datos/teams.txt");
+        return teams;
+    }
 
 }

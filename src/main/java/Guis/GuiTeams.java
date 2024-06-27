@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GuiTeams extends JFrame implements ActionListener {
     private JLabel teamLabel;
@@ -42,7 +43,12 @@ public class GuiTeams extends JFrame implements ActionListener {
     }
     private void buildComponents(){
         teamLabel = new JLabel("Choose team:");
-        teamSelector = new JComboBox<Team> ((ComboBoxModel<Team>) DataTeam.getTeams());
+        DefaultComboBoxModel<Team> model = new DefaultComboBoxModel<>();
+        ArrayList<Team> teams = DataTeam.getTeams();
+        for (Team team : teams) {
+            model.addElement(team);
+        }
+        teamSelector = new JComboBox<>(model);
         rankingLabel = new JLabel("Ranking FIFA:");
         rankingValue = new JLabel("1");
         flagLabel = new JLabel(new ImageIcon("DataPlayer.getPathFlag()"));
