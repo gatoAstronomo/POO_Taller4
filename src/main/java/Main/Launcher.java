@@ -34,11 +34,13 @@ public class Launcher {
         players.add(new Player("21", "Marcelo DIAZ", Position.MF));
         players.add(new Player("22", "Edson PUCH", Position.FW));
         players.add(new Player("23", "Johnny HERRERA", Position.GK));
-
+/*
         Team team = new Team();
         team.setName("Chile");
         team.setPlayers(players);
 
         GuiPlayers gui = new GuiPlayers(team);
+
+ */
     }
 }

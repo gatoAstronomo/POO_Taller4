@@ -1,6 +1,6 @@
 package Guis;
 
-import Data.DataPlayer;
+import Data.DataTeam;
 import Model.Team;
 
 import javax.swing.*;
@@ -35,14 +35,14 @@ public class GuiTeams extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playersButton) {
             Team teamSel = (Team) teamSelector.getSelectedItem();
-            GuiPlayers playersGui = new GuiPlayers(teamSel);
+            //GuiPlayers playersGui = new GuiPlayers(teamSel);
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }
     }
     private void buildComponents(){
         teamLabel = new JLabel("Choose team:");
-        teamSelector = new JComboBox<>(DataPlayer.getTeams());
+        teamSelector = new JComboBox<Team> ((ComboBoxModel<Team>) DataTeam.getTeams());
         rankingLabel = new JLabel("Ranking FIFA:");
         rankingValue = new JLabel("1");
         flagLabel = new JLabel(new ImageIcon("DataPlayer.getPathFlag()"));
