@@ -25,7 +25,6 @@ public class DataPlayer {
             e.printStackTrace();
             return null;
         }
-
         return players;
     }
 

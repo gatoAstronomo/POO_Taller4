@@ -10,7 +10,9 @@ public class Validation {
     public static boolean isDuplicatedPlayerNumber(Team team, String number) {
         ArrayList<Player> players = team.getPlayers();
         for (int i = 0; i < players.size(); i++) {
-            return number.equals(players.get(i).getNumber());
+            if (number.equals(players.get(i).getNumber())) {
+                return true;
+            }
         }
         return false;
     }
@@ -22,11 +24,15 @@ public class Validation {
     public static boolean isValidPosition(Team team, Position position) {
         int count = 0;
         ArrayList<Player> players = team.getPlayers();
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getPosition().equals(position)) {
+
+        for (Player player : players) {
+            if (player.getPosition() == position) {
                 count++;
             }
         }
-        return count == 3;
+        if (position == Position.GK) {
+            return count < 3;
+        }
+        return true;
     }
 }

@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
+import Util.Validation;
 
 public class GuiPlayers extends JFrame implements ActionListener {
     private final JTable playerTable;
@@ -97,6 +98,7 @@ public class GuiPlayers extends JFrame implements ActionListener {
         int selectedRow = playerTable.getSelectedRow();
         if (selectedRow != -1) {
             Player player = team.getPlayers().get(selectedRow);
+
             String newName = JOptionPane.showInputDialog("Enter new name:", player.getName());
             if (newName != null && !newName.trim().isEmpty()) {
                 tableModel.setValueAt(newName, selectedRow, 1);
@@ -104,17 +106,36 @@ public class GuiPlayers extends JFrame implements ActionListener {
 
             String newNumber = JOptionPane.showInputDialog("Enter new number:", player.getNumber());
             if (newNumber != null && !newNumber.trim().isEmpty()) {
-                tableModel.setValueAt(newNumber, selectedRow, 0);
-                player.setNumber(newNumber); // Actualizar el número en el objeto Player
+                if (Validation.isValidNumber(team, newNumber)) {
+                    if (!Validation.isDuplicatedPlayerNumber(team, newNumber)) {
+                        tableModel.setValueAt(newNumber, selectedRow, 0);
+                        player.setNumber(newNumber); // Actualizar el número en el objeto Player
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Number " + newNumber + " is already assigned to another player.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid number. Please enter a number between 1 and 23.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
             String newPosition = JOptionPane.showInputDialog("Enter new position (GK, DF, MF, FW):", player.getPosition().name());
             if (newPosition != null && !newPosition.trim().isEmpty()) {
                 try {
                     Position position = Position.valueOf(newPosition.trim());
-                    tableModel.setValueAt(position.name(), selectedRow, 2);
+
+                    // Validar posición según las reglas
+                    if (Validation.isValidPosition(team, position)) {
+                        tableModel.setValueAt(position.name(), selectedRow, 2);
+                        player.setPosition(position); // Actualizar la posición en el objeto Player
+                    } else {
+                        if (position == Position.GK) {
+                            JOptionPane.showMessageDialog(this, "Maximum number of GK positions reached (3 players).", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Invalid position. Please enter one of the following: GK, DF, MF, FW.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                 } catch (IllegalArgumentException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid position. Please enter one of the following: GK, DF, MF, FW.");
+                    JOptionPane.showMessageDialog(this, "Invalid position. Please enter one of the following: GK, DF, MF, FW.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
