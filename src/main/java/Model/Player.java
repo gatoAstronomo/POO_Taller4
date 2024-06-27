@@ -5,6 +5,12 @@ public class Player {
     private String number;
     private Position position;
 
+    public Player(String number, String name, Position position) {
+        this.name = name;
+        this.number = number;
+        this.position = position;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -20,4 +20,4 @@
 20;Trent SAINSBURY;DF
 21;Massimo LUONGO;MF
 22;Jackson IRVINE;MF
-23;Tommy ROGIC;FW                                                                                                                                                                                                                                                                                                                                                                                                                                    
+23;Tommy ROGIC;FW
