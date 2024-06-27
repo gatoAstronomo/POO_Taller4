@@ -1,7 +1,5 @@
 package Data;
 
-import Model.Player;
-import Model.Position;
 import Model.Team;
 
 import java.io.File;
@@ -43,5 +41,11 @@ public class DataTeam {
         ArrayList<Team> teams = loadTeams("src/main/java/Data/datos/teams.txt");
         return teams;
     }
+
+    public static ArrayList<Team> getTeams(){
+        return loadTeams("src/main/java/Data/datos/teams.txt");
+    }
+
+
 
 }

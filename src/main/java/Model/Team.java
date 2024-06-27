@@ -36,4 +36,12 @@ public class Team {
     public String toString(){
         return this.getName();
     }
+
+    public String getPlayersPath() {
+        return playersPath;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
 }
