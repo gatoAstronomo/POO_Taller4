@@ -33,7 +33,8 @@ public class GuiTeams extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playersButton) {
-            GuiPlayers playersGui = new GuiPlayers();
+            String teamSel = (String) teamSelector.getSelectedItem();
+            GuiPlayers playersGui = new GuiPlayers(teamSel);
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }
