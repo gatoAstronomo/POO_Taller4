@@ -25,6 +25,7 @@ public class GuiTeams extends JFrame implements ActionListener {
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         setup();
+        SwingUtilities.invokeLater(GuiTeams::new);
     }
 
     private void setup() {
@@ -113,9 +114,5 @@ public class GuiTeams extends JFrame implements ActionListener {
         mainPanel.add(buttonPanel);
 
         add(mainPanel, BorderLayout.CENTER);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(GuiTeams::new);
     }
 }
