@@ -1,6 +1,6 @@
 package proyect;
 
-public class Main {
+public class Launcher {
     public static void main(String[] args) {
         System.out.println("Hi");
     }
