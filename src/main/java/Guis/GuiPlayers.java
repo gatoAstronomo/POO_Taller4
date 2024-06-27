@@ -15,9 +15,9 @@ import java.io.IOException;
 public class GuiPlayers extends JFrame implements ActionListener {
     private final JTable playerTable;
     private final DefaultTableModel tableModel;
-    private JButton editButton;
-    private JButton saveButton;
-    private JButton backButton;
+    private RoundButton editButton;
+    private RoundButton saveButton;
+    private RoundButton backButton;
     private Team team;
 
     public GuiPlayers(Team team) {
@@ -37,12 +37,13 @@ public class GuiPlayers extends JFrame implements ActionListener {
         add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
-        editButton = new JButton("Edit player");
+        editButton = new RoundButton("Edit player");
         editButton.addActionListener(this);
-        saveButton = new JButton("Save changes");
+        saveButton = new RoundButton("Save changes");
         saveButton.addActionListener(_ -> saveChanges());
-        backButton = new JButton("Back");
+        backButton = new RoundButton("Back");
         backButton.addActionListener(_ -> dispose());
+
 
         buttonPanel.add(editButton);
         buttonPanel.add(saveButton);
@@ -106,4 +107,32 @@ public class GuiPlayers extends JFrame implements ActionListener {
             }
         }
     }
+
+    private static class RoundButton extends JButton {
+        public RoundButton(String text) {
+            super(text);
+            setContentAreaFilled(false);
+            setOpaque(true);
+            setFocusPainted(false);
+            setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Ajustar el padding del botón
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            if (getModel().isArmed()) {
+                g.setColor(UIManager.getColor("Button.background").darker()); // Color cuando se presiona el botón
+            } else {
+                g.setColor(getBackground());
+            }
+            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20); // Radio de 20 para bordes redondeados
+            super.paintComponent(g);
+        }
+
+        @Override
+        protected void paintBorder(Graphics g) {
+            g.setColor(getForeground());
+            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20); // Radio de 20 para bordes redondeados
+        }
+    }
+
 }
