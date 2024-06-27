@@ -1,5 +1,6 @@
 package Guis;
 
+import Data.DataPlayer;
 import Data.DataTeam;
 import Model.Team;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class GuiTeams extends JFrame implements ActionListener {
@@ -19,7 +21,7 @@ public class GuiTeams extends JFrame implements ActionListener {
     private JButton exitButton;
 
     public GuiTeams() {
-        super("Soccer Teams");
+        super("Teams");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400, 500);
         this.setLayout(new BorderLayout());
@@ -36,11 +38,15 @@ public class GuiTeams extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Team teamSel = (Team) teamSelector.getSelectedItem();
         if (e.getSource() == playersButton) {
-            Team teamSel = (Team) teamSelector.getSelectedItem();
-            //JOptionPane.showMessageDialog(this, "Players for " + teamSel.getName() + " would be shown here.");
-            // Aquí iría la lógica para mostrar los jugadores
-            GuiPlayers players = new GuiPlayers(teamSel);
+            try{
+                DataPlayer.loadPlayers(teamSel.getPlayersPath());
+                GuiPlayers players = new GuiPlayers(teamSel);
+            }catch(NullPointerException ex){
+                JOptionPane.showMessageDialog(this, "Error: Unable to load player data for " + teamSel.getName(),
+                        "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }
