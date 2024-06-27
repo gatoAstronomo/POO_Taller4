@@ -32,4 +32,8 @@ public class Team {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+    @Override
+    public String toString(){
+        return this.getName();
+    }
 }

@@ -36,21 +36,30 @@ public class GuiTeams extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playersButton) {
             Team teamSel = (Team) teamSelector.getSelectedItem();
+            this.rankingLabel.setText(teamSel.getRanking().toString());
             //GuiPlayers playersGui = new GuiPlayers(teamSel);
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }
     }
+    private void updateRankingValue() {
+        Team selectedTeam = (Team) teamSelector.getSelectedItem();
+        if (selectedTeam != null) {
+            rankingValue.setText(selectedTeam.getRanking());
+        }
+    }
     private void buildComponents(){
         teamLabel = new JLabel("Choose team:");
         DefaultComboBoxModel<Team> model = new DefaultComboBoxModel<>();
+
         ArrayList<Team> teams = DataTeam.getTeams();
         for (Team team : teams) {
             model.addElement(team);
         }
         teamSelector = new JComboBox<>(model);
+        teamSelector.addActionListener(e -> updateRankingValue());
         rankingLabel = new JLabel("Ranking FIFA:");
-        rankingValue = new JLabel("1");
+        rankingValue = new JLabel("48");
         flagLabel = new JLabel(new ImageIcon("DataPlayer.getPathFlag()"));
         playersButton = new JButton("Players");
         exitButton = new JButton("Exit");
