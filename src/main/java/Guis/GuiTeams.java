@@ -17,26 +17,30 @@ public class GuiTeams extends JFrame implements ActionListener {
     private JLabel flagLabel;
     private JButton playersButton;
     private JButton exitButton;
-    public GuiTeams(){
-        super("Teams");
+
+    public GuiTeams() {
+        super("Soccer Teams");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 400);
+        this.setSize(400, 500);
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         setup();
-        //invoke();
     }
-    private void setup(){
+
+    private void setup() {
         buildComponents();
         buildListeners();
-        addToGUi();
+        addToGUI();
         setVisible(true);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playersButton) {
             Team teamSel = (Team) teamSelector.getSelectedItem();
-            //GuiPlayers playersGui = new GuiPlayers(teamSel);
+            JOptionPane.showMessageDialog(this, "Players for " + teamSel.getName() + " would be shown here.");
+            // Aquí iría la lógica para mostrar los jugadores
+            //GuiPlayers players = new GuiPlayers(teamSel);
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }
@@ -46,10 +50,13 @@ public class GuiTeams extends JFrame implements ActionListener {
         Team selectedTeam = (Team) teamSelector.getSelectedItem();
         if (selectedTeam != null) {
             rankingValue.setText(selectedTeam.getRanking());
-            flagLabel.setIcon(new ImageIcon("src/main/java/Data/datos/" + selectedTeam.getImagePath()));
+            ImageIcon icon = new ImageIcon("src/main/java/Data/datos/" + selectedTeam.getImagePath());
+            Image img = icon.getImage().getScaledInstance(200, 120, Image.SCALE_SMOOTH);
+            flagLabel.setIcon(new ImageIcon(img));
         }
     }
-    private void buildComponents(){
+
+    private void buildComponents() {
         teamLabel = new JLabel("Choose team:");
         DefaultComboBoxModel<Team> model = new DefaultComboBoxModel<>();
 
@@ -59,35 +66,53 @@ public class GuiTeams extends JFrame implements ActionListener {
         }
         teamSelector = new JComboBox<>(model);
         teamSelector.addActionListener(e -> updateTeamInfo());
-        rankingLabel = new JLabel("Ranking FIFA:");
+
+        rankingLabel = new JLabel("FIFA Ranking:");
         rankingValue = new JLabel("48");
-        flagLabel = new JLabel(new ImageIcon("src/main/java/Data/datos/aus.png"));
-        playersButton = new JButton("Players");
+        flagLabel = new JLabel();
+        flagLabel.setPreferredSize(new Dimension(200, 120));
+
+        playersButton = new JButton("View Players");
         exitButton = new JButton("Exit");
     }
-    private void buildListeners(){
-        playersButton.addActionListener(this);
-        exitButton.addActionListener(this);
+
+    private void buildListeners() {
         playersButton.addActionListener(this);
         exitButton.addActionListener(this);
     }
-    private void addToGUi(){
-        JPanel teamPanel = new JPanel();
-        teamPanel.setLayout(new GridLayout(4, 2));
+
+    private void addToGUI() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JPanel teamPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         teamPanel.add(teamLabel);
         teamPanel.add(teamSelector);
-        teamPanel.add(rankingLabel);
-        teamPanel.add(rankingValue);
-        teamPanel.add(new JLabel()); // Agregar un espacio en blanco
-        teamPanel.add(flagLabel);
-        teamPanel.add(playersButton);
-        teamPanel.add(exitButton);
-        add(teamPanel, BorderLayout.CENTER);
+
+        JPanel rankingPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        rankingPanel.add(rankingLabel);
+        rankingPanel.add(rankingValue);
+
+        JPanel flagPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        flagPanel.add(flagLabel);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(playersButton);
+        buttonPanel.add(exitButton);
+
+        mainPanel.add(teamPanel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(rankingPanel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        mainPanel.add(flagPanel);
+        mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        mainPanel.add(buttonPanel);
+
+        add(mainPanel, BorderLayout.CENTER);
     }
-    private static void invoke(){
-        SwingUtilities.invokeLater(GuiTeams::new);
-    }
+
     public static void main(String[] args) {
-        invoke();
+        SwingUtilities.invokeLater(GuiTeams::new);
     }
 }
