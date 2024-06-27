@@ -1,9 +1,10 @@
 package Model;
 
 public class Player {
-    String name;
-    String number;
-    Position position;
+    private String name;
+    private String number;
+    private Position position;
+
     public void setName(String name) {
         this.name = name;
     }
