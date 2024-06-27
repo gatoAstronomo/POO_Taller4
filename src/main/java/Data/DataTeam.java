@@ -41,8 +41,4 @@ public class DataTeam {
         ArrayList<Team> teams = loadTeams("src/main/java/Data/datos/teams.txt");
         return teams;
     }
-
-
-
-
 }
