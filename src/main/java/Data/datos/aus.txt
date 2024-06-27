@@ -6,7 +6,7 @@
 6;Dylan McGOWAN;MF
 7;Mathew LECKIE;FW
 8;Bailey WRIGHT;MF
-9;Tomi JURIC;FW 
+9;Tomi JURIC;FW
 10;Robbie KRUSE;FW
 11;Jamie MacLAREN;FW
 12;Mitch LANGERAK;GK
