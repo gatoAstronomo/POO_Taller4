@@ -69,7 +69,10 @@ public class GuiTeams extends JFrame implements ActionListener {
 
         rankingLabel = new JLabel("FIFA Ranking:");
         rankingValue = new JLabel("48");
-        flagLabel = new JLabel();
+        ImageIcon icon = new ImageIcon("src/main/java/Data/datos/aus.png");
+        Image img = icon.getImage().getScaledInstance(200, 120, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(img);
+        flagLabel = new JLabel(icon);
         flagLabel.setPreferredSize(new Dimension(200, 120));
 
         playersButton = new JButton("View Players");
