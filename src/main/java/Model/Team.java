@@ -6,8 +6,8 @@ public class Team {
     final private String name;
     final private String ranking;
     final private String imagePath;
-    final private String playersPath;
-    final private ArrayList<Player> players;
+    private String playersPath;
+    private ArrayList<Player> players;
 
     public Team(String name, String ranking, String imagePath, String playersPath, ArrayList<Player> players) {
         this.name = name;
@@ -31,5 +31,13 @@ public class Team {
 
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public String getPlayersPath() {
+        return playersPath;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
     }
 }

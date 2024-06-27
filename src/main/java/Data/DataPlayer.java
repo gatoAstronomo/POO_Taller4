@@ -3,8 +3,7 @@ package Data;
 import Model.Player;
 import Model.Position;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -34,6 +33,14 @@ public class DataPlayer {
         String name = data[1];
         Position position = Position.valueOf(data[2]);
         return new Player(number, name, position);
+    }
+
+    public static void savePlayers(String filePath, ArrayList<Player> players) throws IOException{
+        try (FileWriter fileWriter = new FileWriter(filePath); PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            for (Player player : players){
+                printWriter.println(player.getNumber() + ";" + player.getName() + ";" + player.getPosition());
+            }
+        }
     }
 
 }

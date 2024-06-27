@@ -1,7 +1,5 @@
 package Data;
 
-import Model.Player;
-import Model.Position;
 import Model.Team;
 
 import java.io.File;
@@ -39,5 +37,11 @@ public class DataTeam {
 
         return new Team(name, ranking, imagePath, playersPath, DataPlayer.loadPlayers(playersPath));
     }
+
+    public static ArrayList<Team> getTeams(){
+        return loadTeams("src/main/java/Data/datos/teams.txt");
+    }
+
+
 
 }
