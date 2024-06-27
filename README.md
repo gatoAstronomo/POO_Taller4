@@ -1,2 +1,5 @@
 # 
-Arturo Rivas: Modelo UML, Paquete Datait
+Arturo Rivas: Modelo UML, Paquete DataPlayer, Paquete DataTeam, validaciones.
+
+
+Hector Becerra: Pruebas Unitarias de DataTeam, Implementacion de las validaciones a la ventana, Realizar GuiPlayer
