@@ -7,7 +7,7 @@ public class Team {
     final private String ranking;
     final private String imagePath;
     final private String playersPath;
-    final private ArrayList<Player> players;
+    private ArrayList<Player> players;
 
     public Team(String name, String ranking, String imagePath, String playersPath, ArrayList<Player> players) {
         this.name = name;

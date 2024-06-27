@@ -38,9 +38,9 @@ public class GuiTeams extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playersButton) {
             Team teamSel = (Team) teamSelector.getSelectedItem();
-            JOptionPane.showMessageDialog(this, "Players for " + teamSel.getName() + " would be shown here.");
+            //JOptionPane.showMessageDialog(this, "Players for " + teamSel.getName() + " would be shown here.");
             // Aquí iría la lógica para mostrar los jugadores
-            //GuiPlayers players = new GuiPlayers(teamSel);
+            GuiPlayers players = new GuiPlayers(teamSel);
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }

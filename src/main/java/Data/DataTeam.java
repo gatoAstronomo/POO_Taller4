@@ -42,9 +42,6 @@ public class DataTeam {
         return teams;
     }
 
-    public static ArrayList<Team> getTeams(){
-        return loadTeams("src/main/java/Data/datos/teams.txt");
-    }
 
 
 
