@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataPlayer {
-    public static ArrayList<Player> loadPlayers(String pathTeam) throws FileNotFoundException {
+    public static ArrayList<Player> loadPlayers(String pathTeam) {
         ArrayList<Player> players = new ArrayList<>();
 
         try {
@@ -28,8 +28,8 @@ public class DataPlayer {
         return players;
     }
 
-    public static Player extractPlayer(String linea) {
-        String[] data = linea.split(";");
+    public static Player extractPlayer(String line) {
+        String[] data = line.split(";");
         String number = data[0];
         String name = data[1];
         Position position = Position.valueOf(data[2]);
