@@ -19,16 +19,15 @@ public class GuiPlayers extends JFrame implements ActionListener {
     private JButton saveButton;
     private JButton backButton;
     private Team team;
-    private DataPlayer dataPlayer;
+    private DataPlayer dataPlayer; // Referencia a la clase DataPlayer
 
     public GuiPlayers(Team team) {
         this.team = team;
-        this.dataPlayer = new DataPlayer();
+        this.dataPlayer = new DataPlayer(); // Inicialización de DataPlayer
         setTitle("Players");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
-        setLocationRelativeTo(null);
 
         String[] columnNames = {"Number", "Name", "Position"};
         tableModel = new DefaultTableModel(columnNames, 0);
@@ -53,8 +52,9 @@ public class GuiPlayers extends JFrame implements ActionListener {
 
         add(buttonPanel, BorderLayout.SOUTH);
 
-        setVisible(true);
+        setLocationRelativeTo(null); // Centrar la ventana en la pantalla
 
+        setVisible(true);
     }
 
     private void loadPlayers() {
