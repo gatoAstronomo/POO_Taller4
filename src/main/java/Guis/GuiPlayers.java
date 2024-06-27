@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 
 public class GuiPlayers extends JFrame implements ActionListener {
@@ -44,7 +46,6 @@ public class GuiPlayers extends JFrame implements ActionListener {
         backButton = new RoundButton("Back");
         backButton.addActionListener(_ -> dispose());
 
-
         buttonPanel.add(editButton);
         buttonPanel.add(saveButton);
         buttonPanel.add(backButton);
@@ -52,6 +53,14 @@ public class GuiPlayers extends JFrame implements ActionListener {
         add(buttonPanel, BorderLayout.SOUTH);
 
         setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                adjustFontSize();
+            }
+        });
 
         setVisible(true);
     }
@@ -72,7 +81,8 @@ public class GuiPlayers extends JFrame implements ActionListener {
         }
 
         try {
-            DataPlayer.savePlayers("src/main/java/Data/datos/chi.txt", team.getPlayers());
+            DataPlayer.savePlayers(team.getPlayersPath(), team.getPlayers());  //modificacion para que se implemente con la rama de arturo y su logica en DataPlayer
+            team.setPlayers(DataPlayer.loadPlayers(team.getPlayersPath()));
             JOptionPane.showMessageDialog(this, "Changes saved successfully!");
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,6 +118,20 @@ public class GuiPlayers extends JFrame implements ActionListener {
         }
     }
 
+    private void adjustFontSize() {
+        float newSize = Math.min(getWidth() / 30.0f, getHeight() / 30.0f);
+        Font newFont = playerTable.getFont().deriveFont(newSize);
+        playerTable.setFont(newFont);
+
+
+        editButton.setFont(newFont);
+        saveButton.setFont(newFont);
+        backButton.setFont(newFont);
+
+        // Ajustar la altura de las filas de la tabla
+        playerTable.setRowHeight((int) newSize + 10);
+    }
+
     private static class RoundButton extends JButton {
         public RoundButton(String text) {
             super(text);
@@ -134,5 +158,5 @@ public class GuiPlayers extends JFrame implements ActionListener {
             g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 20, 20); // Radio de 20 para bordes redondeados
         }
     }
-
 }
+
