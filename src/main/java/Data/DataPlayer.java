@@ -41,7 +41,7 @@ public class DataPlayer {
         try (FileWriter fileWriter = new FileWriter(filePath); PrintWriter printWriter = new PrintWriter(fileWriter)) {
 
             for (Player player : players) {
-                printWriter.println(player.getNumber() + "," + player.getName() + "," + player.getPosition());
+                printWriter.println(player.getNumber() + ";" + player.getName() + ";" + player.getPosition());
             }
 
         }
