@@ -1,6 +1,7 @@
 package Guis;
 
 import Data.DataPlayer;
+import Model.Team;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class GuiTeams extends JFrame implements ActionListener {
     private JLabel teamLabel;
-    private JComboBox<String> teamSelector;
+    private JComboBox<Team> teamSelector;
     private JLabel rankingLabel;
     private JLabel rankingValue;
     private JLabel flagLabel;
@@ -33,7 +34,7 @@ public class GuiTeams extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playersButton) {
-            String teamSel = (String) teamSelector.getSelectedItem();
+            Team teamSel = (Team) teamSelector.getSelectedItem();
             GuiPlayers playersGui = new GuiPlayers(teamSel);
         } else if (e.getSource() == exitButton) {
             System.exit(0);
@@ -44,7 +45,7 @@ public class GuiTeams extends JFrame implements ActionListener {
         teamSelector = new JComboBox<>(DataPlayer.getTeams());
         rankingLabel = new JLabel("Ranking FIFA:");
         rankingValue = new JLabel("1");
-        flagLabel = new JLabel(new ImageIcon(DataPlayer.getPathFlag()));
+        flagLabel = new JLabel(new ImageIcon("DataPlayer.getPathFlag()"));
         playersButton = new JButton("Players");
         exitButton = new JButton("Exit");
     }
