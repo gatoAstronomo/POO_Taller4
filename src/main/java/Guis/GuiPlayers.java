@@ -123,7 +123,7 @@ public class GuiPlayers extends JFrame implements ActionListener {
         Font newFont = playerTable.getFont().deriveFont(newSize);
         playerTable.setFont(newFont);
 
-
+        // Ajustar el tamaño de la fuente de los botones
         editButton.setFont(newFont);
         saveButton.setFont(newFont);
         backButton.setFont(newFont);
