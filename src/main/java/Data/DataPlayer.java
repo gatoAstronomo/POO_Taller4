@@ -36,26 +36,15 @@ public class DataPlayer {
         return players;
     }
 
-    public void savePlayers(String filePath, ArrayList<Player> players) throws IOException {
-        FileWriter fileWriter = null;
-        PrintWriter printWriter = null;
+    public static void savePlayers(String filePath, ArrayList<Player> players) throws IOException {
 
-        try {
-            fileWriter = new FileWriter(filePath);
-            printWriter = new PrintWriter(fileWriter);
+        try (FileWriter fileWriter = new FileWriter(filePath); PrintWriter printWriter = new PrintWriter(fileWriter)) {
 
             for (Player player : players) {
                 printWriter.println(player.getNumber() + "," + player.getName() + "," + player.getPosition());
             }
 
-        } finally {
-            if (printWriter != null) {
-                printWriter.close();
-            }
-            if (fileWriter != null) {
-                fileWriter.close();
-            }
         }
     }
-    
+
 }

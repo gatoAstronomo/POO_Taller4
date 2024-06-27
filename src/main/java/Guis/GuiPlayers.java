@@ -19,11 +19,9 @@ public class GuiPlayers extends JFrame implements ActionListener {
     private JButton saveButton;
     private JButton backButton;
     private Team team;
-    private DataPlayer dataPlayer; // Referencia a la clase DataPlayer
 
     public GuiPlayers(Team team) {
         this.team = team;
-        this.dataPlayer = new DataPlayer(); // Inicialización de DataPlayer
         setTitle("Players");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,7 +71,7 @@ public class GuiPlayers extends JFrame implements ActionListener {
         }
 
         try {
-            dataPlayer.savePlayers("src/main/java/Data/datos/chi.txt", team.getPlayers());
+            DataPlayer.savePlayers("src/main/java/Data/datos/chi.txt", team.getPlayers());
             JOptionPane.showMessageDialog(this, "Changes saved successfully!");
         } catch (IOException e) {
             e.printStackTrace();
