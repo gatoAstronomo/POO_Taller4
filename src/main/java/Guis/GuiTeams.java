@@ -1,5 +1,6 @@
 package Guis;
 
+import Data.DataPlayer;
 import Data.DataTeam;
 import Model.Team;
 
@@ -36,11 +37,16 @@ public class GuiTeams extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Team teamSel = (Team) teamSelector.getSelectedItem();
         if (e.getSource() == playersButton) {
-            Team teamSel = (Team) teamSelector.getSelectedItem();
-            //JOptionPane.showMessageDialog(this, "Players for " + teamSel.getName() + " would be shown here.");
-            // Aquí iría la lógica para mostrar los jugadores
-            GuiPlayers players = new GuiPlayers(teamSel);
+            try{
+                DataPlayer.loadPlayers(teamSel.getPlayersPath());
+                GuiPlayers players = new GuiPlayers(teamSel);
+            }catch(NullPointerException ex){
+                JOptionPane.showMessageDialog(this, "Error: Unable to load player data for " + teamSel.getName(),
+                        "File Not Found", JOptionPane.ERROR_MESSAGE);
+            }
+
         } else if (e.getSource() == exitButton) {
             System.exit(0);
         }
