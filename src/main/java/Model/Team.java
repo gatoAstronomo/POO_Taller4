@@ -3,8 +3,9 @@ package Model;
 import java.util.ArrayList;
 
 public class Team {
-    ArrayList<Player> players = new ArrayList<>();
-    String name;
+    private ArrayList<Player> players = new ArrayList<>();
+    private String name;
+    private int ranking;
 
     public ArrayList<Player> getPlayers() {
         return players;

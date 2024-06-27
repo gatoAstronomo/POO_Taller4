@@ -1,9 +1,19 @@
 package Model;
 
 public class Player {
-    String name;
-    String number;
-    Position position;
+    private String name;
+    private String number;
+    private Position position;
+
+    public Player(String number, String name, Position position) {
+        this.number = number;
+        this.name = name;
+        this.position = position;
+    }
+
+    public Player() {
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -27,6 +37,4 @@ public class Player {
     public void setPosition(Position position) {
         this.position = position;
     }
-
 }
-
