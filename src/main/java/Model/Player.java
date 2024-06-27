@@ -6,12 +6,9 @@ public class Player {
     private Position position;
 
     public Player(String number, String name, Position position) {
-        this.number = number;
         this.name = name;
+        this.number = number;
         this.position = position;
-    }
-
-    public Player() {
     }
 
     public void setName(String name) {
@@ -37,4 +34,6 @@ public class Player {
     public void setPosition(Position position) {
         this.position = position;
     }
+
 }
+

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Team {
     private ArrayList<Player> players = new ArrayList<>();
-    private String name;
-    private int ranking;
+    final private String name;
+    final private String ranking;
+    final private String imagePath;
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(ArrayList<Player> players) {
+    public Team(String name, String ranking, String imagePath, ArrayList<Player> players) {
+        this.name = name;
+        this.ranking = ranking;
+        this.imagePath = imagePath;
         this.players = players;
     }
 
@@ -19,7 +19,15 @@ public class Team {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getRanking() {
+        return ranking;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }
